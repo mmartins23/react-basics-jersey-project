@@ -11,7 +11,7 @@ function App() {
       price: 119.99,
       active: false,
       quantity: 1,
-      isInBag: true,
+      isInBag: false,
     },
     {
       id: 2,
@@ -94,7 +94,11 @@ function App() {
       <section className="items">
         <h4>Jersey Shop Made with React JS</h4>
         {items.map((item) => (
-          <Item key={item.id} item={item} />
+          <Item 
+          selectProduct={(id,name) => alert(`You clicked on ID: ${id} - Name: ${name}`)}
+          key={item.id} 
+          item={item} 
+          />
         ))}
       </section>
 
