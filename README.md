@@ -440,3 +440,114 @@ Whenever `setCount` is called, React will re-render the component, updating the 
 
 
 ***
+
+## React Hooks
+
+React Hooks are functions that let you use state and other React features in functional components. They were introduced in React 16.8 to allow functional components to manage state and side effects, which were traditionally associated with class components. Here are some commonly used React Hooks along with code examples:
+
+### 1. `useState` Hook:
+
+The `useState` hook is used to add state to functional components.
+
+```jsx
+import React, { useState } from 'react';
+
+const Counter = () => {
+  // Declare a state variable 'count' with an initial value of 0
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    // Update the 'count' state when the button is clicked
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+};
+```
+
+### 2. `useEffect` Hook:
+
+The `useEffect` hook is used to perform side effects in functional components, such as fetching data, subscribing to external services, or updating the DOM.
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+const DataFetcher = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Fetch data when the component mounts
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const response = await fetch('https://api.example.com/data');
+    const result = await response.json();
+    setData(result);
+  };
+
+  return (
+    <div>
+      <p>Data: {data ? data : 'Loading...'}</p>
+    </div>
+  );
+};
+```
+
+### 3. `useContext` Hook:
+
+The `useContext` hook allows you to subscribe to React context without introducing nesting.
+
+```jsx
+import React, { useContext } from 'react';
+
+const ThemeContext = React.createContext('light');
+
+const ThemedComponent = () => {
+  const theme = useContext(ThemeContext);
+
+  return (
+    <div style={{ background: theme === 'light' ? '#fff' : '#333', color: theme === 'light' ? '#333' : '#fff' }}>
+      <p>Themed Content</p>
+    </div>
+  );
+};
+```
+
+### 4. Custom Hooks:
+
+You can also create custom hooks to reuse logic across components.
+
+```jsx
+import React, { useState } from 'react';
+
+const useCounter = (initialValue, step) => {
+  const [count, setCount] = useState(initialValue);
+
+  const increment = () => {
+    setCount(count + step);
+  };
+
+  return [count, increment];
+};
+
+const Counter = () => {
+  const [count, increment] = useCounter(0, 1);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+};
+```
+
+These are just a few examples of React Hooks. There are others, such as `useReducer`, `useCallback`, `useMemo`, and more. Hooks provide a more concise and readable way to manage state and side effects in functional components.
+
+***
