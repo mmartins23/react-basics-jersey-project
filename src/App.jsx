@@ -1,9 +1,10 @@
 import "./App.css";
+import { useState } from "react";
 import Item from "./components/Item";
 import OrderDetails from "./components/OrderDetails";
 
 function App() {
-  const items = [
+  const [items, setItems] = useState([
     {
       id: 1,
       photo: "real_madrid.webp",
@@ -85,19 +86,25 @@ function App() {
       quantity: 1,
       isInBag: false,
     },
-  ];
+  ]);
 
   const itemsInBag = items.filter((item) => item.isInBag);
+
+  function selectHandler(id) {
+    let item = items.filter((item) => item.id === id)[0];
+    item.isInBag = !item.isInBag;
+    setItems(items.map((el) => (el.id === id ? item : el)));
+  }
 
   return (
     <>
       <section className="items">
         <h4>Jersey Shop Made with React JS</h4>
         {items.map((item) => (
-          <Item 
-          selectProduct={(id,name) => alert(`You clicked on ID: ${id} - Name: ${name}`)}
-          key={item.id} 
-          item={item} 
+          <Item
+            selectProduct={selectHandler}
+            key={item.id}
+            item={item}
           />
         ))}
       </section>
