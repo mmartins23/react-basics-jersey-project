@@ -267,3 +267,75 @@ In this example:
 - The component renders the count and a button that increments it.
 
 Functional components with hooks provide a more powerful alternative to class components for managing state and side effects.
+
+
+***
+
+## Props
+
+In React, props (short for properties) allow you to pass data from a parent component to a child component. Props are a way of making your components dynamic and customizable. Let me provide an example to illustrate the concept:
+
+```jsx
+import React from 'react';
+
+// Functional component that receives 'name' as a prop
+const Greeting = (props) => {
+  return <h1>Hello, {props.name}!</h1>;
+};
+
+// Parent component using the Greeting component and passing a prop
+const App = () => {
+  return <Greeting name="John" />;
+};
+
+// Example usage:
+// <App />
+```
+
+In this example:
+
+- The `Greeting` component is a functional component that takes a prop called `name`.
+- The `App` component renders the `Greeting` component and passes the value "John" as the `name` prop.
+
+When `App` is rendered, it effectively renders the `Greeting` component with the prop value, resulting in the output:
+
+```html
+<h1>Hello, John!</h1>
+```
+
+Props are read-only and should not be modified within the child component. If you need to manage state within a component, you should use state or hooks.
+
+You can pass various types of data as props, including strings, numbers, arrays, objects, and even functions. Here's an example with multiple props:
+
+```jsx
+import React from 'react';
+
+const UserProfile = (props) => {
+  return (
+    <div>
+      <h2>User Profile</h2>
+      <p>Name: {props.name}</p>
+      <p>Age: {props.age}</p>
+      <p>Email: {props.email}</p>
+    </div>
+  );
+};
+
+const App = () => {
+  const user = {
+    name: 'Alice',
+    age: 25,
+    email: 'alice@example.com',
+  };
+
+  return <UserProfile {...user} />;
+};
+
+// Example usage:
+// <App />
+```
+
+In this example, the `UserProfile` component receives an object (`user`) as props, and the `App` component spreads the properties of the `user` object as individual props to `UserProfile`. This makes the component more flexible and easier to maintain.
+
+
+***

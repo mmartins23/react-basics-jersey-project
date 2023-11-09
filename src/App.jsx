@@ -1,4 +1,5 @@
 import "./App.css";
+import Item from "./components/Item";
 import OrderDetails from "./components/OrderDetails";
 
 function App() {
@@ -86,33 +87,18 @@ function App() {
     },
   ];
 
+  const itemsInBag = items.filter((item) => item.isInBag);
+
   return (
     <>
       <section className="items">
         <h4>Jersey Shop Made with React JS</h4>
         {items.map((item) => (
-          <div key={item.id} className={`product ${item.isInBag ? 'selected' : '' }`}>
-            <div className="photo">
-              <img src={"./img/" + item.photo} />
-            </div>
-            <div className="description">
-              <span className="name">{item.name}</span>
-              <span className="price">{item.price}</span>
-
-              { item.isInBag &&
-                <div className="quantity-area">
-                  <button>-</button>
-                  <span className="quantity">1</span>
-                  <button>+</button>
-                </div>
-              }
-
-            </div>
-          </div>
+          <Item key={item.id} item={item} />
         ))}
       </section>
 
-      <OrderDetails/>
+      {itemsInBag.length > 0 && <OrderDetails />}
     </>
   );
 }
