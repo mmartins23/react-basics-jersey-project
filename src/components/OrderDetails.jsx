@@ -1,5 +1,4 @@
 export default function OrderDetails({ itemsInBag }) {
-
   function calculateOrderTotal() {
     let orderTotal = 0;
     itemsInBag.forEach((item) => (orderTotal += item.price * item.quantity));
@@ -28,7 +27,7 @@ export default function OrderDetails({ itemsInBag }) {
 
           <tr>
             <th>Total</th>
-            <th>$ 119.99</th>
+            <th>$ {calculateOrderTotal()}</th>
           </tr>
         </tbody>
       </table>

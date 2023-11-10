@@ -4,6 +4,7 @@ import Item from "./components/Item";
 import OrderDetails from "./components/OrderDetails";
 
 function App() {
+  const shopName = "Jersey Shop Made with React JS";
   const [items, setItems] = useState([
     {
       id: 1,
@@ -11,7 +12,7 @@ function App() {
       name: "Real Madrid",
       price: 119.99,
       active: false,
-      quantity: 3,
+      quantity: 1,
       isInBag: false,
     },
     {
@@ -96,12 +97,26 @@ function App() {
     setItems(items.map((el) => (el.id === id ? item : el)));
   }
 
+  function quantityHandler(e, id, increment) {
+    e.stopPropagation();
+    let item = items.filter((item) => item.id === id)[0];
+    item.quantity += increment;
+    setItems(items.map((el) => (el.id === id ? item : el)));
+  }
+
   return (
     <>
       <section className="items">
-        <h4>Jersey Shop Made with React JS</h4>
+        <h4>{shopName}</h4>
         {items.map((item) => (
-          <Item selectProduct={selectHandler} key={item.id} item={item} />
+          <Item
+            selectProduct={(id) => selectHandler(id)}
+            changeQuantity={(e, id, increment) =>
+              quantityHandler(e, id, increment)
+            }
+            key={item.id}
+            item={item}
+          />
         ))}
       </section>
 
