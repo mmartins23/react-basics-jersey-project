@@ -11,7 +11,7 @@ function App() {
       name: "Real Madrid",
       price: 119.99,
       active: false,
-      quantity: 1,
+      quantity: 3,
       isInBag: false,
     },
     {
@@ -101,15 +101,11 @@ function App() {
       <section className="items">
         <h4>Jersey Shop Made with React JS</h4>
         {items.map((item) => (
-          <Item
-            selectProduct={selectHandler}
-            key={item.id}
-            item={item}
-          />
+          <Item selectProduct={selectHandler} key={item.id} item={item} />
         ))}
       </section>
 
-      {itemsInBag.length > 0 && <OrderDetails />}
+      {itemsInBag.length > 0 && <OrderDetails itemsInBag={itemsInBag} />}
     </>
   );
 }
